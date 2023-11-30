@@ -1,0 +1,30 @@
+.header {
+  padding-top: 40px;
+  padding-bottom: 45px;
+  display: flex;
+  gap: 200px;
+  align-items: center;
+  color: #fff;
+}
+
+.logo {
+  font-size: 40px;
+  font-weight: 700;
+  span {
+    color: coral;
+  }
+}
+
+nav {
+  ul {
+    display: flex;
+    gap: 30px;
+    li {
+      font-size: 20px;
+      font-weight: 600;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
