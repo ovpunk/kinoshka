@@ -12,7 +12,7 @@ export const TopSlider = () => {
   const { premierFilmsData } = usePremierFilmsQuery();
   //берем 4 премьеры для слайдов
   const premiers = premierFilmsData?.items.slice(6, 10);
-
+  console.log("premiers", premiers);
   //запросы на получение больших изображений для слайдера
   const imageQueries =
     premiers?.map((premier) => ({
@@ -52,6 +52,18 @@ export const TopSlider = () => {
             <SwiperSlide key={premier.kinopoiskId}>
               <div className={styles.slide_content}>
                 <img src={imageUrl} alt="" />
+                <p className={styles.title}>{premier.nameRu}</p>
+                <p className={styles.info}>
+                  {`
+                  ${premier.year},
+                  ${premier.countries
+                    .map((country) => country.country)
+                    .join(", ")}, ${premier.genres
+                    .map((genre) => genre.genre)
+                    .join(", ")}.
+                  `}
+                </p>
+                <p className={styles.link_btn}>Смотреть</p>
               </div>
             </SwiperSlide>
           );

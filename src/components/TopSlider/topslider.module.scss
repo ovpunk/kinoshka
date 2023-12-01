@@ -14,3 +14,36 @@
     object-fit: cover;
   }
 }
+
+.title {
+  position: absolute;
+  bottom: 200px;
+  left: 80px;
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.info {
+  position: absolute;
+  bottom: 160px;
+  left: 80px;
+  font-size: 20px;
+  color: #999;
+}
+
+.link_btn {
+  position: absolute;
+  bottom: 70px;
+  left: 80px;
+  font-size: 26px;
+  font-weight: 700;
+  padding: 10px 40px;
+  background-color: #ff571a;
+  transition: 0.5s;
+  border-radius: 30px;
+  &:hover {
+    cursor: pointer;
+    transition: 0.5s;
+    background-color: coral;
+  }
+}

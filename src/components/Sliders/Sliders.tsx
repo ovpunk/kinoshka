@@ -18,9 +18,9 @@ export const Sliders: FC<ISlidersProps> = ({ props }) => {
   const filteredFilms = props?.items.filter((film) =>
     film.genres.every((genre) => genre.genre.toLowerCase() !== "мультфильм")
   );
-  console.log(filteredFilms);
+
   const films = filteredFilms?.slice(5, 15);
-  //console.log(films);
+
   return (
     <>
       <Swiper

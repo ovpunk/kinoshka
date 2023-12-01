@@ -28,7 +28,7 @@ export const imagesFetch = (id: string | number) => {
 
 export const topFilmsFetch = () => {
   return fetch(
-    `https://kinopoiskapiunofficial.tech/api/v2.2/films?order=RATING&type=FILM&ratingFrom=8&ratingTo=10&yearFrom=1000&yearTo=3000&page=1`,
+    `https://kinopoiskapiunofficial.tech/api/v2.2/films/collections?type=TOP_250_MOVIES&page=1`,
     {
       method: "GET",
       headers: {
@@ -41,7 +41,7 @@ export const topFilmsFetch = () => {
 
 export const topSeriesFetch = () => {
   return fetch(
-    `https://kinopoiskapiunofficial.tech/api/v2.2/films?order=RATING&type=TV_SERIES&ratingFrom=8&ratingTo=10&yearFrom=1000&yearTo=3000&page=1`,
+    `https://kinopoiskapiunofficial.tech/api/v2.2/films/collections?type=TOP_250_TV_SHOWS&page=1`,
     {
       method: "GET",
       headers: {
