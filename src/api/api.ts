@@ -1,8 +1,39 @@
 const apiKey = import.meta.env.VITE_API_KEY;
 
+const months = [
+  "JANUARY",
+  "FEBRUARY",
+  "MARCH",
+  "APRIL",
+  "MAY",
+  "JUNE",
+  "JULY",
+  "AUGUST",
+  "SEPTEMBER",
+  "OCTOBER",
+  "NOVEMBER",
+  "DECEMBER",
+];
+
+const currentMonthIndex = new Date().getMonth();
+const currentMonthName = months[currentMonthIndex];
+
 export const filmPremieresFetch = () => {
   return fetch(
-    "https://kinopoiskapiunofficial.tech/api/v2.2/films/premieres?year=2023&month=NOVEMBER",
+    `https://kinopoiskapiunofficial.tech/api/v2.2/films/premieres?year=2023&month=${currentMonthName}`,
+    {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "X-API-KEY": apiKey,
+      },
+    }
+  );
+};
+
+export const newFilmsFetch = () => {
+  return fetch(
+    "https://kinopoiskapiunofficial.tech/api/v2.2/films?order=RATING&type=FILM&ratingFrom=0&ratingTo=10&yearFrom=2023&yearTo=3000&page=1",
     {
       method: "GET",
       headers: {

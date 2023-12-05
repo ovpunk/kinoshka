@@ -1,0 +1,32 @@
+.wrapper {
+  background-color: #000;
+  color: #fff;
+  padding-top: 170px;
+  min-height: 100%;
+}
+
+.films {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin: 40px 0;
+}
+
+.item {
+  width: 200px;
+  text-align: center;
+  transition: transform 0.3s ease;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+  }
+  img {
+    width: 200px;
+    height: 280px;
+  }
+  p {
+    font-size: 18px;
+    font-weight: 600;
+  }
+}

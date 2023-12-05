@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "./header.module.scss";
 
 export const Header = () => {
@@ -5,11 +6,13 @@ export const Header = () => {
     <header>
       <div className="container">
         <div className={styles.header}>
-          <div className={styles.logo}>
-            <p>
-              <span>К</span>иношка
-            </p>
-          </div>
+          <Link to={"/"}>
+            <div className={styles.logo}>
+              <p>
+                <span>К</span>иношка
+              </p>
+            </div>
+          </Link>
           <nav className={styles.nav}>
             <ul>
               <li>Главное</li>

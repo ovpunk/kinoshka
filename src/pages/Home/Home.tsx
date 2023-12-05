@@ -2,38 +2,54 @@ import styles from "./home.module.scss";
 import { TopSlider } from "../../components/TopSlider/TopSlider";
 import { Sliders } from "../../components/Sliders/Sliders";
 import {
-  usePremierFilmsQuery,
+  useNewFilms,
+  //usePremierFilmsQuery,
   useTopFilms,
   useTopSeries,
 } from "../../queries/queries";
 import { IFilms } from "../../queries/queries";
-import { FC } from "react";
+import { FC, useMemo } from "react";
+import { Link } from "react-router-dom";
 
 export interface ISlider {
   title: string;
   query: IFilms | undefined;
+  type: string;
 }
 
 export const Home: FC = () => {
-  const { premierFilmsData } = usePremierFilmsQuery();
-  const { topFilmsData } = useTopFilms();
-  const { topSeriesData } = useTopSeries();
+  const { newFilmsData, loadingNewFilms } = useNewFilms();
+  const { topFilmsData, loadingTopFilms } = useTopFilms();
+  const { topSeriesData, loadingTopSeries } = useTopSeries();
 
-  const arrSliders: ISlider[] = [
-    {
-      title: "Новинки",
-      query: premierFilmsData,
-    },
-    {
-      title: "Топ фильмов",
-      query: topFilmsData,
-    },
-    {
-      title: "Топ сериалов",
-      query: topSeriesData,
-    },
-  ];
+  const arrSliders: ISlider[] = useMemo(
+    () => [
+      {
+        title: "Новинки",
+        query: newFilmsData,
+        type: "newfilms",
+      },
+      {
+        title: "Топ фильмов",
+        query: topFilmsData,
+        type: "topfilms",
+      },
+      {
+        title: "Топ сериалов",
+        query: topSeriesData,
+        type: "topseries",
+      },
+    ],
+    [newFilmsData, topFilmsData, topSeriesData]
+  );
 
+  //useEffect(() => {
+  //  dispatch(setCollection(arrSliders));
+  //}, [arrSliders, dispatch]);
+
+  if (loadingNewFilms || loadingTopFilms || loadingTopSeries) {
+    return <p>Загрузка...</p>;
+  }
   return (
     <div className={styles.home}>
       <TopSlider />
@@ -42,7 +58,12 @@ export const Home: FC = () => {
           {arrSliders.map((slider) => {
             return (
               <div key={slider.title}>
-                <h2>{slider.title}</h2>
+                <Link
+                  to={`/${slider.type}`}
+                  state={{ query: slider.query, title: slider.title }}
+                >
+                  <h2>{slider.title}</h2>
+                </Link>
                 <Sliders props={slider.query} />
               </div>
             );

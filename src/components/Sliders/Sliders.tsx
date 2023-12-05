@@ -34,7 +34,20 @@ export const Sliders: FC<ISlidersProps> = ({ props }) => {
             return (
               <SwiperSlide key={film.kinopoiskId}>
                 <div className={styles.slider_item}>
-                  <img src={film.posterUrl} alt="" />
+                  <div className={styles.wrapper}>
+                    <img src={film.posterUrl} alt="" />
+                    <span
+                      className={`${styles.rating} ${
+                        film.ratingKinopoisk && film.ratingKinopoisk > 8
+                          ? styles.highRating
+                          : film.ratingKinopoisk && film.ratingKinopoisk > 7
+                          ? styles.mediumRating
+                          : styles.lowRating
+                      }`}
+                    >
+                      {film.ratingKinopoisk}
+                    </span>
+                  </div>
                   <p>{film.nameRu}</p>
                 </div>
               </SwiperSlide>

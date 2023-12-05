@@ -1,5 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { filmPremieresFetch, topFilmsFetch, topSeriesFetch } from "../api/api";
+import {
+  filmPremieresFetch,
+  newFilmsFetch,
+  topFilmsFetch,
+  topSeriesFetch,
+} from "../api/api";
 
 export interface IFilms {
   items: {
@@ -35,8 +40,26 @@ export const usePremierFilmsQuery = () => {
   };
 };
 
+export const useNewFilms = () => {
+  const { data: newFilmsData, isLoading: loadingNewFilms } = useQuery<IFilms>({
+    queryKey: ["getNewFilms"],
+    queryFn: async () => {
+      const res = await newFilmsFetch();
+      if (res.ok) {
+        const response = await res.json();
+        return response;
+      }
+      return [];
+    },
+  });
+  return {
+    newFilmsData,
+    loadingNewFilms,
+  };
+};
+
 export const useTopFilms = () => {
-  const { data: topFilmsData } = useQuery<IFilms>({
+  const { data: topFilmsData, isLoading: loadingTopFilms } = useQuery<IFilms>({
     queryKey: ["getTopFilms"],
     queryFn: async () => {
       const res = await topFilmsFetch();
@@ -48,23 +71,27 @@ export const useTopFilms = () => {
     },
   });
   return {
+    loadingTopFilms,
     topFilmsData,
   };
 };
 
 export const useTopSeries = () => {
-  const { data: topSeriesData } = useQuery<IFilms>({
-    queryKey: ["getTopSeries"],
-    queryFn: async () => {
-      const res = await topSeriesFetch();
-      if (res.ok) {
-        const response = await res.json();
-        return response;
-      }
-      return [];
-    },
-  });
+  const { data: topSeriesData, isLoading: loadingTopSeries } = useQuery<IFilms>(
+    {
+      queryKey: ["getTopSeries"],
+      queryFn: async () => {
+        const res = await topSeriesFetch();
+        if (res.ok) {
+          const response = await res.json();
+          return response;
+        }
+        return [];
+      },
+    }
+  );
   return {
+    loadingTopSeries,
     topSeriesData,
   };
 };

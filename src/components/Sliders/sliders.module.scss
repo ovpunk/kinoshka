@@ -29,3 +29,24 @@
     width: 100px;
   }
 }
+.rating {
+  position: absolute;
+  top: 0;
+  left: 30px;
+  width: 40px;
+}
+
+.highRating {
+  background-color: #009900;
+}
+
+.mediumRating {
+  background-color: #66ff66;
+}
+.lowRating {
+  background-color: #777;
+}
+
+.wrapper {
+  position: relative;
+}

@@ -12,7 +12,6 @@ export const TopSlider = () => {
   const { premierFilmsData } = usePremierFilmsQuery();
   //берем 4 премьеры для слайдов
   const premiers = premierFilmsData?.items.slice(6, 10);
-  console.log("premiers", premiers);
   //запросы на получение больших изображений для слайдера
   const imageQueries =
     premiers?.map((premier) => ({
