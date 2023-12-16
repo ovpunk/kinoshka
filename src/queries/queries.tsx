@@ -21,6 +21,22 @@ export interface IFilms {
     type?: string;
   }[];
   total: number;
+  totalPages?: number;
+}
+
+export interface INewFilms {
+  newFilmsData: IFilms | undefined;
+  loadingNewFilms: boolean;
+}
+
+export interface ITopFilms {
+  topFilmsData: IFilms | undefined;
+  loadingTopFilms: boolean;
+}
+
+export interface ITopSeries {
+  topSeriesData: IFilms | undefined;
+  loadingTopSeries: boolean;
 }
 
 export const usePremierFilmsQuery = () => {
@@ -40,11 +56,11 @@ export const usePremierFilmsQuery = () => {
   };
 };
 
-export const useNewFilms = () => {
+export const useNewFilms = (page: number): INewFilms => {
   const { data: newFilmsData, isLoading: loadingNewFilms } = useQuery<IFilms>({
-    queryKey: ["getNewFilms"],
+    queryKey: ["getNewFilms", page],
     queryFn: async () => {
-      const res = await newFilmsFetch();
+      const res = await newFilmsFetch(page);
       if (res.ok) {
         const response = await res.json();
         return response;
@@ -58,11 +74,11 @@ export const useNewFilms = () => {
   };
 };
 
-export const useTopFilms = () => {
+export const useTopFilms = (page: number): ITopFilms => {
   const { data: topFilmsData, isLoading: loadingTopFilms } = useQuery<IFilms>({
-    queryKey: ["getTopFilms"],
+    queryKey: ["getTopFilms", page],
     queryFn: async () => {
-      const res = await topFilmsFetch();
+      const res = await topFilmsFetch(page);
       if (res.ok) {
         const response = await res.json();
         return response;
@@ -76,12 +92,12 @@ export const useTopFilms = () => {
   };
 };
 
-export const useTopSeries = () => {
+export const useTopSeries = (page: number): ITopSeries => {
   const { data: topSeriesData, isLoading: loadingTopSeries } = useQuery<IFilms>(
     {
-      queryKey: ["getTopSeries"],
+      queryKey: ["getTopSeries", page],
       queryFn: async () => {
-        const res = await topSeriesFetch();
+        const res = await topSeriesFetch(page);
         if (res.ok) {
           const response = await res.json();
           return response;

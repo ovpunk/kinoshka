@@ -31,19 +31,6 @@ export const filmPremieresFetch = () => {
   );
 };
 
-export const newFilmsFetch = () => {
-  return fetch(
-    "https://kinopoiskapiunofficial.tech/api/v2.2/films?order=RATING&type=FILM&ratingFrom=0&ratingTo=10&yearFrom=2023&yearTo=3000&page=1",
-    {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "X-API-KEY": apiKey,
-      },
-    }
-  );
-};
-
 export const imagesFetch = (id: string | number) => {
   return fetch(
     `https://kinopoiskapiunofficial.tech/api/v2.2/films/${id}/images?type=STILL&page=1`,
@@ -57,9 +44,9 @@ export const imagesFetch = (id: string | number) => {
   );
 };
 
-export const topFilmsFetch = () => {
+export const newFilmsFetch = (page: number) => {
   return fetch(
-    `https://kinopoiskapiunofficial.tech/api/v2.2/films/collections?type=TOP_250_MOVIES&page=1`,
+    `https://kinopoiskapiunofficial.tech/api/v2.2/films?order=RATING&type=FILM&ratingFrom=0&ratingTo=10&yearFrom=2023&yearTo=3000&page=${page}`,
     {
       method: "GET",
       headers: {
@@ -70,9 +57,22 @@ export const topFilmsFetch = () => {
   );
 };
 
-export const topSeriesFetch = () => {
+export const topFilmsFetch = (page: number) => {
   return fetch(
-    `https://kinopoiskapiunofficial.tech/api/v2.2/films/collections?type=TOP_250_TV_SHOWS&page=1`,
+    `https://kinopoiskapiunofficial.tech/api/v2.2/films/collections?type=TOP_250_MOVIES&page=${page}`,
+    {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "X-API-KEY": apiKey,
+      },
+    }
+  );
+};
+
+export const topSeriesFetch = (page: number) => {
+  return fetch(
+    `https://kinopoiskapiunofficial.tech/api/v2.2/films/collections?type=TOP_250_TV_SHOWS&page=${page}`,
     {
       method: "GET",
       headers: {

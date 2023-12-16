@@ -10,7 +10,7 @@
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 30px;
-  margin: 40px 0;
+  margin: 40px 0 80px;
 }
 
 .item {
@@ -28,5 +28,33 @@
   p {
     font-size: 18px;
     font-weight: 600;
+  }
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 80px;
+  transition: 0.3s;
+
+  p {
+    &:hover {
+      transition: 0.3s;
+
+      cursor: pointer;
+      color: #999;
+    }
+  }
+}
+
+.active {
+  color: coral;
+  transition: 0.3s;
+  &:hover {
+    transition: 0.3s;
+
+    color: #ff571a;
   }
 }

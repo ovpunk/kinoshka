@@ -10,6 +10,7 @@ import {
 import { IFilms } from "../../queries/queries";
 import { FC, useMemo } from "react";
 import { Link } from "react-router-dom";
+//import { AppContext } from "../../App";
 
 export interface ISlider {
   title: string;
@@ -18,9 +19,10 @@ export interface ISlider {
 }
 
 export const Home: FC = () => {
-  const { newFilmsData, loadingNewFilms } = useNewFilms();
-  const { topFilmsData, loadingTopFilms } = useTopFilms();
-  const { topSeriesData, loadingTopSeries } = useTopSeries();
+  //const { page } = useContext(AppContext);
+  const { newFilmsData, loadingNewFilms } = useNewFilms(1);
+  const { topFilmsData, loadingTopFilms } = useTopFilms(1);
+  const { topSeriesData, loadingTopSeries } = useTopSeries(1);
 
   const arrSliders: ISlider[] = useMemo(
     () => [
@@ -43,10 +45,6 @@ export const Home: FC = () => {
     [newFilmsData, topFilmsData, topSeriesData]
   );
 
-  //useEffect(() => {
-  //  dispatch(setCollection(arrSliders));
-  //}, [arrSliders, dispatch]);
-
   if (loadingNewFilms || loadingTopFilms || loadingTopSeries) {
     return <p>Загрузка...</p>;
   }
@@ -60,7 +58,11 @@ export const Home: FC = () => {
               <div key={slider.title}>
                 <Link
                   to={`/${slider.type}`}
-                  state={{ query: slider.query, title: slider.title }}
+                  state={{
+                    query: slider.query,
+                    type: slider.type,
+                    title: slider.title,
+                  }}
                 >
                   <h2>{slider.title}</h2>
                 </Link>
