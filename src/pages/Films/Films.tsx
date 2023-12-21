@@ -12,14 +12,13 @@ import {
 import { useContext, useEffect } from "react";
 import { AppContext } from "../../App";
 
-export const NewFilms = () => {
+export const Films = () => {
   const { page, setPage } = useContext(AppContext);
-  console.log("page", page);
-  const location = useLocation();
   useEffect(() => {
     setPage(1);
   }, [setPage]);
-  const { title, type } = location.state || {}; // Получаем пропсы из объекта состояния
+  const location = useLocation();
+  const { title, type } = location.state || { title: "", type: "" }; // Получаем пропсы из объекта состояния
 
   let hookResult;
 
@@ -56,9 +55,21 @@ export const NewFilms = () => {
           <div className={styles.films}>
             {(myQuery as INewFilms).newFilmsData?.items.map((film) => (
               <div key={film.kinopoiskId} className={styles.item}>
-                <img src={film.posterUrl} alt="" />
+                <div className={styles.poster}>
+                  <img src={film.posterUrl} alt="" />
+                  <span
+                    className={`${styles.rating} ${
+                      film.ratingKinopoisk && film.ratingKinopoisk > 8
+                        ? styles.highRating
+                        : film.ratingKinopoisk && film.ratingKinopoisk > 7
+                        ? styles.mediumRating
+                        : styles.lowRating
+                    }`}
+                  >
+                    {film.ratingKinopoisk}
+                  </span>
+                </div>
                 <p>{film.nameRu}</p>
-                <p>{film.ratingKinopoisk}</p>
               </div>
             ))}
           </div>
@@ -88,9 +99,21 @@ export const NewFilms = () => {
           <div className={styles.films}>
             {(myQuery as ITopFilms).topFilmsData?.items.map((film) => (
               <div key={film.kinopoiskId} className={styles.item}>
-                <img src={film.posterUrl} alt="" />
+                <div className={styles.poster}>
+                  <img src={film.posterUrl} alt="" />
+                  <span
+                    className={`${styles.rating} ${
+                      film.ratingKinopoisk && film.ratingKinopoisk > 8
+                        ? styles.highRating
+                        : film.ratingKinopoisk && film.ratingKinopoisk > 7
+                        ? styles.mediumRating
+                        : styles.lowRating
+                    }`}
+                  >
+                    {film.ratingKinopoisk}
+                  </span>
+                </div>
                 <p>{film.nameRu}</p>
-                <p>{film.ratingKinopoisk}</p>
               </div>
             ))}
           </div>
@@ -121,9 +144,21 @@ export const NewFilms = () => {
             {(myQuery as ITopSeries).topSeriesData?.items.map((film) => {
               return (
                 <div key={film.kinopoiskId} className={styles.item}>
-                  <img src={film.posterUrl} alt="" />
+                  <div className={styles.poster}>
+                    <img src={film.posterUrl} alt="" />
+                    <span
+                      className={`${styles.rating} ${
+                        film.ratingKinopoisk && film.ratingKinopoisk > 8
+                          ? styles.highRating
+                          : film.ratingKinopoisk && film.ratingKinopoisk > 7
+                          ? styles.mediumRating
+                          : styles.lowRating
+                      }`}
+                    >
+                      {film.ratingKinopoisk}
+                    </span>
+                  </div>
                   <p>{film.nameRu}</p>
-                  <p>{film.ratingKinopoisk}</p>
                 </div>
               );
             })}

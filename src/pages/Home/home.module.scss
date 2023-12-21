@@ -9,3 +9,12 @@
     margin-left: 60px;
   }
 }
+
+.title {
+  display: flex;
+  align-items: center;
+  svg {
+    width: 34px;
+    height: 34px;
+  }
+}

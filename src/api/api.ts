@@ -82,3 +82,39 @@ export const topSeriesFetch = (page: number) => {
     }
   );
 };
+
+export const currentFilmFetch = (id: number) => {
+  return fetch(`https://kinopoiskapiunofficial.tech/api/v2.2/films/${id}`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "X-API-KEY": apiKey,
+    },
+  });
+};
+
+export const creatorsFetch = (id: number) => {
+  return fetch(
+    `https://kinopoiskapiunofficial.tech/api/v1/staff?filmId=${id}`,
+    {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "X-API-KEY": apiKey,
+      },
+    }
+  );
+};
+
+export const moneyFetch = (id: number) => {
+  return fetch(
+    `https://kinopoiskapiunofficial.tech/api/v2.2/films/${id}/box_office`,
+    {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "X-API-KEY": apiKey,
+      },
+    }
+  );
+};

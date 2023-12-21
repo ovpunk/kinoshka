@@ -26,9 +26,34 @@
     height: 280px;
   }
   p {
+    padding-top: 10px;
     font-size: 18px;
-    font-weight: 600;
+    //font-weight: 600;
+    padding-left: 10px;
+    padding-right: 10px;
   }
+}
+
+.poster {
+  position: relative;
+}
+
+.rating {
+  position: absolute;
+  top: 0;
+  left: 0px;
+  width: 40px;
+}
+
+.highRating {
+  background-color: #009900;
+}
+
+.mediumRating {
+  background-color: #66ff66;
+}
+.lowRating {
+  background-color: #777;
 }
 .pagination {
   display: flex;

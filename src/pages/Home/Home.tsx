@@ -19,7 +19,6 @@ export interface ISlider {
 }
 
 export const Home: FC = () => {
-  //const { page } = useContext(AppContext);
   const { newFilmsData, loadingNewFilms } = useNewFilms(1);
   const { topFilmsData, loadingTopFilms } = useTopFilms(1);
   const { topSeriesData, loadingTopSeries } = useTopSeries(1);
@@ -64,9 +63,27 @@ export const Home: FC = () => {
                     title: slider.title,
                   }}
                 >
-                  <h2>{slider.title}</h2>
+                  <div className={styles.title}>
+                    <h2>{slider.title}</h2>
+                    <svg
+                      className="feather feather-chevron-right"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <polyline points="9 18 15 12 9 6" />
+                    </svg>
+                  </div>
                 </Link>
-                <Sliders props={slider.query} />
+                <Sliders
+                  query={slider.query}
+                  type={slider.type}
+                  title={slider.title}
+                />
               </div>
             );
           })}
