@@ -5,8 +5,11 @@ import {
   filmPremieresFetch,
   moneyFetch,
   newFilmsFetch,
+  seasonsFetch,
   topFilmsFetch,
   topSeriesFetch,
+  trailerFetch,
+  whereToWatchFetch,
 } from "../api/api";
 
 export interface IFilms {
@@ -176,9 +179,18 @@ export const useCreators = (id: number) => {
   });
   return { creatorsData, loadingCreators };
 };
+type TMoneyIndicators = {
+  amount: number;
+  symbol: string;
+  type: string;
+};
+interface IMoney {
+  items: TMoneyIndicators[];
+  total: number;
+}
 
 export const useMoney = (id: number) => {
-  const { data: moneyData, isLoading: loadingMoney } = useQuery({
+  const { data: moneyData, isLoading: loadingMoney } = useQuery<IMoney>({
     queryKey: ["getMoney", id],
     queryFn: async () => {
       const res = await moneyFetch(id);
@@ -190,4 +202,75 @@ export const useMoney = (id: number) => {
     },
   });
   return { moneyData, loadingMoney };
+};
+
+type TTrailer = {
+  name: string;
+  site: string;
+  url: string;
+};
+interface ITrailer {
+  items: TTrailer[];
+  total: number;
+}
+
+export const useTrailer = (id: number) => {
+  const { data: trailerData, isLoading: loadingTrailer } = useQuery<ITrailer>({
+    queryKey: ["getTrailer", id],
+    queryFn: async () => {
+      const res = await trailerFetch(id);
+      if (res.ok) {
+        const response = await res.json();
+        return response;
+      }
+      return [];
+    },
+  });
+  return { trailerData, loadingTrailer };
+};
+
+type TWhereToWatch = {
+  logoUrl: string;
+  platform: string;
+  url: string;
+};
+
+interface IWhereToWatch {
+  items: TWhereToWatch[];
+  total: number;
+}
+
+export const useWhereToWatch = (id: number) => {
+  const { data: whereWatchData, isLoading: loadingWhereWatch } =
+    useQuery<IWhereToWatch>({
+      queryKey: ["getWhereWatch", id],
+      queryFn: async () => {
+        const res = await whereToWatchFetch(id);
+        if (res.ok) {
+          const response = await res.json();
+          return response;
+        }
+        return [];
+      },
+    });
+  return { whereWatchData, loadingWhereWatch };
+};
+
+interface ISeasons {
+  total: number;
+}
+
+export const useSeasons = (id: number) => {
+  const { data: seasonsData, isLoading: loadingSeasons } = useQuery<ISeasons>({
+    queryKey: ["getSeasons", id],
+    queryFn: async () => {
+      const res = await seasonsFetch(id);
+      if (res.ok) {
+        const response = await res.json();
+        return response;
+      }
+      return [];
+    },
+  });
+  return { seasonsData, loadingSeasons };
 };

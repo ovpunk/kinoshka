@@ -118,3 +118,44 @@ export const moneyFetch = (id: number) => {
     }
   );
 };
+
+export const trailerFetch = (id: number) => {
+  return fetch(
+    `https://kinopoiskapiunofficial.tech/api/v2.2/films/${id}/videos`,
+    {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "X-API-KEY": apiKey,
+      },
+    }
+  );
+};
+
+export const whereToWatchFetch = (id: number) => {
+  return fetch(
+    `https://kinopoiskapiunofficial.tech/api/v2.2/films/${id}/external_sources?page=1`,
+    {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "X-API-KEY": apiKey,
+      },
+    }
+  );
+};
+
+export const seasonsFetch = (id: number) => {
+  return fetch(
+    `
+  https://kinopoiskapiunofficial.tech/api/v2.2/films/${id}/seasons
+  `,
+    {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "X-API-KEY": apiKey,
+      },
+    }
+  );
+};
