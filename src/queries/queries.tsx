@@ -1,8 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import {
+  collectionsFetch,
   creatorsFetch,
   currentFilmFetch,
   filmPremieresFetch,
+  filteredFilmsFetch,
+  filteredSeriesFetch,
   moneyFetch,
   newFilmsFetch,
   seasonsFetch,
@@ -28,21 +31,6 @@ export interface IFilms {
   }[];
   total: number;
   totalPages?: number;
-}
-
-export interface INewFilms {
-  newFilmsData: IFilms | undefined;
-  loadingNewFilms: boolean;
-}
-
-export interface ITopFilms {
-  topFilmsData: IFilms | undefined;
-  loadingTopFilms: boolean;
-}
-
-export interface ITopSeries {
-  topSeriesData: IFilms | undefined;
-  loadingTopSeries: boolean;
 }
 
 export interface ICurrentFilm {
@@ -88,6 +76,10 @@ export const usePremierFilmsQuery = () => {
   };
 };
 
+export interface INewFilms {
+  newFilmsData: IFilms | undefined;
+  loadingNewFilms: boolean;
+}
 export const useNewFilms = (page: number): INewFilms => {
   const { data: newFilmsData, isLoading: loadingNewFilms } = useQuery<IFilms>({
     queryKey: ["getNewFilms", page],
@@ -106,6 +98,10 @@ export const useNewFilms = (page: number): INewFilms => {
   };
 };
 
+export interface ITopFilms {
+  topFilmsData: IFilms | undefined;
+  loadingTopFilms: boolean;
+}
 export const useTopFilms = (page: number): ITopFilms => {
   const { data: topFilmsData, isLoading: loadingTopFilms } = useQuery<IFilms>({
     queryKey: ["getTopFilms", page],
@@ -124,6 +120,10 @@ export const useTopFilms = (page: number): ITopFilms => {
   };
 };
 
+export interface ITopSeries {
+  topSeriesData: IFilms | undefined;
+  loadingTopSeries: boolean;
+}
 export const useTopSeries = (page: number): ITopSeries => {
   const { data: topSeriesData, isLoading: loadingTopSeries } = useQuery<IFilms>(
     {
@@ -273,4 +273,61 @@ export const useSeasons = (id: number) => {
     },
   });
   return { seasonsData, loadingSeasons };
+};
+
+export interface IFilteredFilms {
+  filteredFilmsData: IFilms | undefined;
+  loadingFilteredFilms: boolean;
+}
+
+export const useFilteredFilms = (): IFilteredFilms => {
+  const { data: filteredFilmsData, isLoading: loadingFilteredFilms } =
+    useQuery<IFilms>({
+      queryKey: ["getFilteredFilms"],
+      queryFn: async () => {
+        const res = await filteredFilmsFetch();
+        if (res.ok) {
+          const response = await res.json();
+          return response;
+        }
+        return [];
+      },
+    });
+  return { filteredFilmsData, loadingFilteredFilms };
+};
+
+export interface IFilteredSeries {
+  filteredSeriesData: IFilms | undefined;
+  loadingFilteredSeries: boolean;
+}
+export const useFilteredSeries = (): IFilteredSeries => {
+  const { data: filteredSeriesData, isLoading: loadingFilteredSeries } =
+    useQuery<IFilms>({
+      queryKey: ["getFilteredSeries"],
+      queryFn: async () => {
+        const res = await filteredSeriesFetch();
+        if (res.ok) {
+          const response = await res.json();
+          return response;
+        }
+        return [];
+      },
+    });
+  return { filteredSeriesData, loadingFilteredSeries };
+};
+
+export const useCollections = (type: string, page: number) => {
+  const { data: collectionsData, isLoading: loadingCollections } =
+    useQuery<IFilms>({
+      queryKey: ["getCollections", type, page],
+      queryFn: async () => {
+        const res = await collectionsFetch(type, page);
+        if (res.ok) {
+          const response = await res.json();
+          return response;
+        }
+        return [];
+      },
+    });
+  return { collectionsData, loadingCollections };
 };

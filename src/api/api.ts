@@ -159,3 +159,42 @@ export const seasonsFetch = (id: number) => {
     }
   );
 };
+
+export const filteredFilmsFetch = () => {
+  return fetch(
+    `https://kinopoiskapiunofficial.tech/api/v2.2/films?order=RATING&type=FILM&ratingFrom=0&ratingTo=10&yearFrom=1000&yearTo=3000&page=1`,
+    {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "X-API-KEY": apiKey,
+      },
+    }
+  );
+};
+
+export const filteredSeriesFetch = () => {
+  return fetch(
+    `https://kinopoiskapiunofficial.tech/api/v2.2/films?order=RATING&type=TV_SERIES&ratingFrom=0&ratingTo=10&yearFrom=1000&yearTo=3000&page=1`,
+    {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "X-API-KEY": apiKey,
+      },
+    }
+  );
+};
+
+export const collectionsFetch = (type: string, page: number) => {
+  return fetch(
+    `https://kinopoiskapiunofficial.tech/api/v2.2/films/collections?type=${type}&page=${page}`,
+    {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "X-API-KEY": apiKey,
+      },
+    }
+  );
+};

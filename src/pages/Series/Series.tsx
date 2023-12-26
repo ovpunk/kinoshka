@@ -1,19 +1,20 @@
 import { FC } from "react";
-import { useFilteredFilms } from "../../queries/queries";
-import styles from "./films.module.scss";
+import { useFilteredSeries } from "../../queries/queries";
+import styles from "./series.module.scss";
 import { Link } from "react-router-dom";
-export const Films: FC = () => {
-  const { filteredFilmsData, loadingFilteredFilms } = useFilteredFilms();
-  if (loadingFilteredFilms) {
+export const Series: FC = () => {
+  const { filteredSeriesData, loadingFilteredSeries } = useFilteredSeries();
+  if (loadingFilteredSeries) {
     return <p>Loading.......</p>;
   }
+  console.log(filteredSeriesData);
 
   return (
     <div className={styles.wrapper}>
       <div className="container">
         <div className={styles.settings}>settings</div>
         <div className={styles.films}>
-          {filteredFilmsData?.items.map((film) => (
+          {filteredSeriesData?.items.map((film) => (
             <Link
               to={`/film/${film.kinopoiskId}`}
               state={film.kinopoiskId}

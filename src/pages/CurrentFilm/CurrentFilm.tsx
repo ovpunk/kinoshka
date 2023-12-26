@@ -86,6 +86,7 @@ export const CurrentFilm: FC = () => {
                   <div>
                     <a href={trailer?.url}>
                       <div className={styles.trailer}>
+                        <img src={currentFilmData.coverUrl} alt="" />
                         <svg
                           className={styles.trailer__play}
                           fill="none"
@@ -107,9 +108,7 @@ export const CurrentFilm: FC = () => {
               </div>
               <div className={styles.info_middle}>
                 <div className={styles.info_title}>
-                  <h2>
-                    {currentFilmData.nameRu}({currentFilmData.year})
-                  </h2>
+                  <h2>{currentFilmData.nameRu}</h2>
                   <span>{currentFilmData.ratingKinopoisk}</span>
                 </div>
                 <h3>{currentFilmData.nameOriginal}</h3>

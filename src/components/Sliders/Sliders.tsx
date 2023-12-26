@@ -35,10 +35,7 @@ export const Sliders: FC<ISlidersProps> = ({ query, type, title }) => {
           films.map((film) => {
             return (
               <SwiperSlide key={film.kinopoiskId}>
-                <Link
-                  to={`/films/${film.kinopoiskId}`}
-                  state={film.kinopoiskId}
-                >
+                <Link to={`/film/${film.kinopoiskId}`} state={film.kinopoiskId}>
                   <div className={styles.slider_item}>
                     <div className={styles.wrapper}>
                       <img src={film.posterUrl} alt="" />
@@ -63,7 +60,7 @@ export const Sliders: FC<ISlidersProps> = ({ query, type, title }) => {
         {films && (
           <SwiperSlide>
             <Link
-              to={`/${type}`}
+              to={`/content/${type}`}
               state={{
                 query: query,
                 type: type,

@@ -56,7 +56,7 @@ export const Home: FC = () => {
             return (
               <div key={slider.title}>
                 <Link
-                  to={`/${slider.type}`}
+                  to={`/content/${slider.type}`}
                   state={{
                     query: slider.query,
                     type: slider.type,

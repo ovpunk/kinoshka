@@ -4,8 +4,11 @@ import "./index.scss";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Home } from "./pages/Home/Home.tsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Films } from "./pages/Films/Films.tsx";
+import { Content } from "./pages/Content/Content.tsx";
 import { CurrentFilm } from "./pages/CurrentFilm/CurrentFilm.tsx";
+import { Films } from "./pages/Films/Films.tsx";
+import { Series } from "./pages/Series/Series.tsx";
+import { Collections } from "./pages/Collections/Collections.tsx";
 //import { Provider } from "react-redux";
 
 const queryClient = new QueryClient();
@@ -20,12 +23,24 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/:type",
+        path: "/content/:type",
+        element: <Content />,
+      },
+      {
+        path: "/film/:kinopoiskId",
+        element: <CurrentFilm />,
+      },
+      {
+        path: "/films",
         element: <Films />,
       },
       {
-        path: "/films/:kinopoiskId",
-        element: <CurrentFilm />,
+        path: "/tvseries",
+        element: <Series />,
+      },
+      {
+        path: "/collections",
+        element: <Collections />,
       },
     ],
   },
