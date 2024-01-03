@@ -198,3 +198,16 @@ export const collectionsFetch = (type: string, page: number) => {
     }
   );
 };
+
+export const searchFetch = (keyword: string) => {
+  return fetch(
+    `https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword=${keyword}&page=1`,
+    {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "X-API-KEY": apiKey,
+      },
+    }
+  );
+};

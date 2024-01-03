@@ -122,6 +122,7 @@ export const Collections: FC = () => {
           )}
           {pages.map((num) => (
             <li
+              key={num}
               onClick={() => setPage(num)}
               className={num === page ? styles.active_page : ""}
             >

@@ -4,10 +4,9 @@ import {
   creatorsFetch,
   currentFilmFetch,
   filmPremieresFetch,
-  filteredFilmsFetch,
-  filteredSeriesFetch,
   moneyFetch,
   newFilmsFetch,
+  searchFetch,
   seasonsFetch,
   topFilmsFetch,
   topSeriesFetch,
@@ -21,6 +20,7 @@ export interface IFilms {
     duration: string | number;
     genres: { genre: string }[];
     kinopoiskId: number;
+    filmId?: number;
     nameRu: string;
     posterUrl: string;
     posterUrlPreview: string;
@@ -29,7 +29,7 @@ export interface IFilms {
     ratingKinopoisk?: number;
     type?: string;
   }[];
-  total: number;
+  total?: number;
   totalPages?: number;
 }
 
@@ -275,47 +275,6 @@ export const useSeasons = (id: number) => {
   return { seasonsData, loadingSeasons };
 };
 
-export interface IFilteredFilms {
-  filteredFilmsData: IFilms | undefined;
-  loadingFilteredFilms: boolean;
-}
-
-export const useFilteredFilms = (): IFilteredFilms => {
-  const { data: filteredFilmsData, isLoading: loadingFilteredFilms } =
-    useQuery<IFilms>({
-      queryKey: ["getFilteredFilms"],
-      queryFn: async () => {
-        const res = await filteredFilmsFetch();
-        if (res.ok) {
-          const response = await res.json();
-          return response;
-        }
-        return [];
-      },
-    });
-  return { filteredFilmsData, loadingFilteredFilms };
-};
-
-export interface IFilteredSeries {
-  filteredSeriesData: IFilms | undefined;
-  loadingFilteredSeries: boolean;
-}
-export const useFilteredSeries = (): IFilteredSeries => {
-  const { data: filteredSeriesData, isLoading: loadingFilteredSeries } =
-    useQuery<IFilms>({
-      queryKey: ["getFilteredSeries"],
-      queryFn: async () => {
-        const res = await filteredSeriesFetch();
-        if (res.ok) {
-          const response = await res.json();
-          return response;
-        }
-        return [];
-      },
-    });
-  return { filteredSeriesData, loadingFilteredSeries };
-};
-
 export const useCollections = (type: string, page: number) => {
   const { data: collectionsData, isLoading: loadingCollections } =
     useQuery<IFilms>({
@@ -330,4 +289,30 @@ export const useCollections = (type: string, page: number) => {
       },
     });
   return { collectionsData, loadingCollections };
+};
+
+interface foundMovie {
+  nameRu: string;
+  posterUrl: string;
+  rating: string;
+  year: string;
+  filmId: number;
+}
+interface ISearch {
+  films: foundMovie[];
+}
+
+export const useSearch = (keyword: string) => {
+  const { data: searchData, isLoading: loadingSearch } = useQuery<ISearch>({
+    queryKey: ["getSearch", keyword],
+    queryFn: async () => {
+      const res = await searchFetch(keyword);
+      if (res.ok) {
+        const response = await res.json();
+        return response;
+      }
+      return [];
+    },
+  });
+  return { searchData, loadingSearch };
 };
