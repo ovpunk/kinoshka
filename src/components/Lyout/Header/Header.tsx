@@ -79,9 +79,10 @@ export const Header = () => {
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
               />
-              {debounceValue ? (
+
+              {debounceValue && foundMovies?.length ? (
                 <div className={styles.search_result}>
-                  {foundMovies &&
+                  {foundMovies?.length &&
                     foundMovies.map((film) => (
                       <Link
                         key={film.filmId}

@@ -2,6 +2,7 @@ import { FC, useEffect, useState } from "react";
 import { useCollections } from "../../queries/queries";
 import styles from "./collection.module.scss";
 import { Link } from "react-router-dom";
+import { Spinner } from "../../components/Spinner/Spinner";
 
 export const Collections: FC = () => {
   const [collection, setCollection] = useState("TOP_POPULAR_ALL");
@@ -69,7 +70,7 @@ export const Collections: FC = () => {
         </ul>
         <div className={styles.wrapper}>
           {loadingCollections ? (
-            <p>Loading....</p>
+            <Spinner />
           ) : (
             <div className={styles.films}>
               {collectionsData?.items.map((film) => (

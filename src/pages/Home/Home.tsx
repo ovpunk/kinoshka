@@ -1,15 +1,11 @@
 import styles from "./home.module.scss";
 import { TopSlider } from "../../components/TopSlider/TopSlider";
 import { Sliders } from "../../components/Sliders/Sliders";
-import {
-  useNewFilms,
-  //usePremierFilmsQuery,
-  useTopFilms,
-  useTopSeries,
-} from "../../queries/queries";
+import { useNewFilms, useTopFilms, useTopSeries } from "../../queries/queries";
 import { IFilms } from "../../queries/queries";
 import { FC, useMemo } from "react";
 import { Link } from "react-router-dom";
+import { Spinner } from "../../components/Spinner/Spinner";
 //import { AppContext } from "../../App";
 
 export interface ISlider {
@@ -45,7 +41,7 @@ export const Home: FC = () => {
   );
 
   if (loadingNewFilms || loadingTopFilms || loadingTopSeries) {
-    return <p>Загрузка...</p>;
+    return <Spinner />;
   }
   return (
     <div className={styles.home}>

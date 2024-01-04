@@ -9,6 +9,7 @@ import {
   useTrailer,
   useWhereToWatch,
 } from "../../queries/queries";
+import { Spinner } from "../../components/Spinner/Spinner";
 
 export const CurrentFilm: FC = () => {
   const location = useLocation();
@@ -56,7 +57,7 @@ export const CurrentFilm: FC = () => {
     loadingWhereWatch &&
     loadingSeasons
   ) {
-    return <p>Loading...</p>;
+    return <Spinner />;
   }
   return (
     <>
