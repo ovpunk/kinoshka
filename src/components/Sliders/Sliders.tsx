@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import styles from "./sliders.module.scss";
 import { register } from "swiper/element/bundle";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -22,6 +22,31 @@ export const Sliders: FC<ISlidersProps> = ({ query, type, title }) => {
     film.genres.every((genre) => genre.genre.toLowerCase() !== "мультфильм")
   );
   const films = filteredFilms?.slice(0, 10);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const updateWidth = () => {
+      setScreenWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", updateWidth);
+    return () => {
+      window.removeEventListener("resize", updateWidth);
+    };
+  }, []);
+
+  const calculateSlidesCount = () => {
+    if (screenWidth >= 1200) {
+      return 5;
+    } else if (screenWidth >= 992) {
+      return 4;
+    } else if (screenWidth >= 768) {
+      return 3;
+    } else if (screenWidth >= 650) {
+      return 2;
+    } else {
+      return 1;
+    }
+  };
+  const slidesCount = calculateSlidesCount();
 
   return (
     <>
@@ -29,7 +54,7 @@ export const Sliders: FC<ISlidersProps> = ({ query, type, title }) => {
         modules={[Navigation, Scrollbar]}
         navigation
         spaceBetween={30}
-        slidesPerView={5}
+        slidesPerView={slidesCount}
       >
         {films &&
           films.map((film) => {
@@ -38,20 +63,22 @@ export const Sliders: FC<ISlidersProps> = ({ query, type, title }) => {
                 <Link to={`/film/${film.kinopoiskId}`} state={film.kinopoiskId}>
                   <div className={styles.slider_item}>
                     <div className={styles.wrapper}>
-                      <img src={film.posterUrl} alt="" />
-                      <span
-                        className={`${styles.rating} ${
-                          film.ratingKinopoisk && film.ratingKinopoisk > 8
-                            ? styles.highRating
-                            : film.ratingKinopoisk && film.ratingKinopoisk > 7
-                            ? styles.mediumRating
-                            : styles.lowRating
-                        }`}
-                      >
-                        {film.ratingKinopoisk}
-                      </span>
+                      <div className={styles.wrapper__inner}>
+                        <img src={film.posterUrl} alt="" />
+                        <span
+                          className={`${styles.rating} ${
+                            film.ratingKinopoisk && film.ratingKinopoisk > 8
+                              ? styles.highRating
+                              : film.ratingKinopoisk && film.ratingKinopoisk > 7
+                              ? styles.mediumRating
+                              : styles.lowRating
+                          }`}
+                        >
+                          {film.ratingKinopoisk}
+                        </span>
+                      </div>
                     </div>
-                    <p>{film.nameRu}</p>
+                    <p className={styles.film__name}>{film.nameRu}</p>
                   </div>
                 </Link>
               </SwiperSlide>

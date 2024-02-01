@@ -53,7 +53,9 @@ export const Collections: FC = () => {
     return pagesArray;
   };
   const pages = generatePages(page, totalPages);
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [page, collection]);
   return (
     <div className="container">
       <div className={styles.collections}>

@@ -12,6 +12,9 @@ import { useContext, useEffect } from "react";
 import { AppContext } from "../../App";
 
 export const Content = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const { page, setPage } = useContext(AppContext);
   useEffect(() => {
     setPage(1);

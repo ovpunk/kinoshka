@@ -34,14 +34,26 @@
 }
 
 .films {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 30px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 30px;
+  grid-row-gap: 60px;
   margin: 40px 0 80px;
+  padding: 0 20px;
+  @media (max-width: 1170px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  @media (max-width: 992px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media (max-width: 756px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .item {
+  margin: 0 auto;
   width: 200px;
   text-align: center;
   transition: transform 0.3s ease;
