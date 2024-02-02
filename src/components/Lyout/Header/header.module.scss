@@ -83,6 +83,9 @@
     gap: 20px;
     justify-content: space-between;
   }
+  @media (max-width: 576px) {
+    align-items: first baseline;
+  }
 }
 
 .logo {
@@ -92,7 +95,7 @@
     color: coral;
   }
   @media (max-width: 576px) {
-    font-size: 30px;
+    font-size: 25px;
   }
 }
 
@@ -109,7 +112,7 @@ nav {
       color: #777;
       transition: 0.3s;
       @media (max-width: 576px) {
-        font-size: 18px;
+        font-size: 14px;
       }
       &:hover {
         transition: 0.3s;
@@ -122,6 +125,10 @@ nav {
         width: 30px;
         height: 30px;
         transition: 0.3s;
+        @media (max-width: 576px) {
+          width: 20px;
+          height: 20px;
+        }
         &:hover {
           transition: 0.3s;
 

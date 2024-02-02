@@ -124,4 +124,7 @@ footer {
   border-bottom: 2px solid coral;
   padding-bottom: 8px;
   color: #fff;
+  @media (max-width: 576px) {
+    padding-bottom: 4px;
+  }
 }

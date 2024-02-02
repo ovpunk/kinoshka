@@ -50,6 +50,9 @@
   @media (max-width: 756px) {
     grid-template-columns: repeat(2, 1fr);
   }
+  @media (max-width: 490px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 
 .item {
@@ -128,6 +131,9 @@
     display: flex;
     align-items: center;
     gap: 20px;
+    @media (max-width: 429px) {
+      gap: 10px;
+    }
     li {
       cursor: pointer;
     }
