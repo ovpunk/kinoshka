@@ -7,6 +7,7 @@ import { useQueries } from "@tanstack/react-query";
 import { imagesFetch } from "../../api/api";
 import styles from "./topslider.module.scss";
 import { usePremierFilmsQuery } from "../../queries/queries";
+import { Link } from "react-router-dom";
 
 export const TopSlider = () => {
   const { premierFilmsData } = usePremierFilmsQuery();
@@ -62,7 +63,12 @@ export const TopSlider = () => {
                     .join(", ")}.
                   `}
                 </p>
-                <p className={styles.link_btn}>Смотреть</p>
+                <Link
+                  to={`/film/${premier.kinopoiskId}`}
+                  state={premier.kinopoiskId}
+                >
+                  <p className={styles.link_btn}>Подробнее</p>
+                </Link>
               </div>
             </SwiperSlide>
           );

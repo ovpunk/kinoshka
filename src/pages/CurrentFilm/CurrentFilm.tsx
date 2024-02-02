@@ -171,77 +171,94 @@ export const CurrentFilm: FC = () => {
                     )}
                   </div>
                 )}
+
                 <h4>
                   {currentFilmData.type === "FILM" ? "О фильме" : "О сериале"}
                 </h4>
 
-                <dl className={styles.info_table}>
-                  <div className={styles.table_element}>
-                    <dt>Год производства </dt>
-                    {seasonsData?.total ? (
-                      <dd>
-                        {currentFilmData.year} ({seasonsData.total} сезонов)
-                      </dd>
-                    ) : (
-                      <dd>{currentFilmData.year} </dd>
-                    )}
-                  </div>
-                  <div className={styles.table_element}>
-                    <dt>Страна</dt>
-                    <dd>
-                      {`${currentFilmData.countries
-                        .map((country) => country.country)
-                        .join(", ")}`}
-                    </dd>
-                  </div>
-                  <div className={styles.table_element}>
-                    <dt>Жанр</dt>
-                    <dd>
-                      {`${currentFilmData.genres
-                        .map((genre) => genre.genre)
-                        .join(", ")}`}
-                    </dd>
-                  </div>
-                  {!!currentFilmData.slogan && (
+                <div className={styles.info_middle_down}>
+                  <dl className={styles.info_table}>
                     <div className={styles.table_element}>
-                      <dt>Слоган</dt>
-                      <dd>{currentFilmData.slogan}</dd>
+                      <dt>Год производства </dt>
+                      {seasonsData?.total ? (
+                        <dd>
+                          {currentFilmData.year} ({seasonsData.total} сезонов)
+                        </dd>
+                      ) : (
+                        <dd>{currentFilmData.year} </dd>
+                      )}
+                    </div>
+                    <div className={styles.table_element}>
+                      <dt>Страна</dt>
+                      <dd>
+                        {`${currentFilmData.countries
+                          .map((country) => country.country)
+                          .join(", ")}`}
+                      </dd>
+                    </div>
+                    <div className={styles.table_element}>
+                      <dt>Жанр</dt>
+                      <dd>
+                        {`${currentFilmData.genres
+                          .map((genre) => genre.genre)
+                          .join(", ")}`}
+                      </dd>
+                    </div>
+                    {!!currentFilmData.slogan && (
+                      <div className={styles.table_element}>
+                        <dt>Слоган</dt>
+                        <dd>{currentFilmData.slogan}</dd>
+                      </div>
+                    )}
+                    <div className={styles.table_element}>
+                      <dt>Режиссер</dt>
+                      <dd>{`${directors
+                        ?.map((director) => director.nameRu)
+                        .join(", ")}...`}</dd>
+                    </div>
+
+                    {!!moneyData?.total && (
+                      <div>
+                        {moneyData.items.map((item) => (
+                          <div className={styles.table_element} key={item.type}>
+                            <dt>{getTypeLabel(item.type)}</dt>
+                            <dd>$ {formatNumber(item.amount)}</dd>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    <div className={styles.table_element}>
+                      <dt>Возраст</dt>
+                      <dd>
+                        {currentFilmData.ratingAgeLimits
+                          ? currentFilmData.ratingAgeLimits.replace(/\D/g, "")
+                          : 0}
+                        +
+                      </dd>
+                    </div>
+                    <div className={styles.table_element}>
+                      <dt>Время</dt>
+                      <dd>{currentFilmData.filmLength} мин</dd>
+                    </div>
+                  </dl>
+                  {!!actors?.length && (
+                    <div className={styles.info_actors}>
+                      <h5>В главных ролях</h5>
+                      <ul className={styles.actors}>
+                        {actors.map((actor) => {
+                          return (
+                            <li key={actor.nameRu} className={styles.actor}>
+                              {actor.nameRu}
+                            </li>
+                          );
+                        })}
+                      </ul>
                     </div>
                   )}
-                  <div className={styles.table_element}>
-                    <dt>Режиссер</dt>
-                    <dd>{`${directors
-                      ?.map((director) => director.nameRu)
-                      .join(", ")}...`}</dd>
-                  </div>
-
-                  {!!moneyData?.total && (
-                    <div>
-                      {moneyData.items.map((item) => (
-                        <div className={styles.table_element} key={item.type}>
-                          <dt>{getTypeLabel(item.type)}</dt>
-                          <dd>$ {formatNumber(item.amount)}</dd>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-
-                  <div className={styles.table_element}>
-                    <dt>Возраст</dt>
-                    <dd>
-                      {currentFilmData.ratingAgeLimits
-                        ? currentFilmData.ratingAgeLimits.replace(/\D/g, "")
-                        : 0}
-                      +
-                    </dd>
-                  </div>
-                  <div className={styles.table_element}>
-                    <dt>Время</dt>
-                    <dd>{currentFilmData.filmLength} мин</dd>
-                  </div>
-                </dl>
+                </div>
               </div>
-              {!!actors?.length && (
+              {/*{!!actors?.length && (
                 <div className={styles.info_right}>
                   <h5>В главных ролях</h5>
                   <ul className={styles.actors}>
@@ -254,7 +271,7 @@ export const CurrentFilm: FC = () => {
                     })}
                   </ul>
                 </div>
-              )}
+              )}*/}
             </div>
           </div>
         </div>
